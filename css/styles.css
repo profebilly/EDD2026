@@ -798,6 +798,54 @@ body {
 }
 .review-list::-webkit-scrollbar { width: 4px; }
 .review-list::-webkit-scrollbar-track { background: transparent; }
+
+/* ── Navegación superior y Comunicados ───────────────────── */
+.top-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 20px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+.nav-link {
+  color: var(--text-2);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 20px;
+  border-radius: 50px;
+  transition: var(--t);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+}
+.nav-link:hover {
+  color: var(--text);
+  background: var(--surface-h);
+  border-color: var(--border-h);
+  transform: translateY(-1px);
+}
+.nav-link.active {
+  color: var(--text);
+  background: linear-gradient(135deg, rgba(108,99,255,0.3), rgba(240,147,251,0.3));
+  border-color: rgba(108,99,255,0.5);
+  box-shadow: 0 4px 15px rgba(108,99,255,0.2);
+}
+
+.notice-desc {
+  font-size: 0.85rem;
+  color: var(--accent-mid);
+  background: rgba(108,99,255,0.08);
+  border: 1px solid rgba(108,99,255,0.2);
+  padding: 12px 18px;
+  border-radius: var(--r-sm);
+  margin: 0 auto 32px;
+  max-width: 480px;
+  line-height: 1.6;
+}
 .review-list::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 2px;

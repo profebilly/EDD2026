@@ -228,10 +228,16 @@ function selectAnswer(displayIdx, correctDisplayIdx, q, indices) {
   });
 
   /* Feedback */
+  let explText = q.explicacion || '';
+  if (explText) {
+    // Ajustar dinámicamente referencias como "La opción A" a la nueva letra asignada
+    explText = explText.replace(/(La opci[oó]n|La alternativa|La respuesta)\s+[A-E]\b/gi, `$1 ${LETTERS[correctDisplayIdx]}`);
+  }
+
   if (isCorrect) {
-    showFeedback('correct', '✅ ¡Correcto!', q.explicacion || 'Muy bien, sigue así.');
+    showFeedback('correct', '✅ ¡Correcto!', explText || 'Muy bien, sigue así.');
   } else {
-    const expl = q.explicacion ? ` ${q.explicacion}` : '';
+    const expl = explText ? ` ${explText}` : '';
     showFeedback('wrong', '❌ Incorrecto',
       `La respuesta correcta es: "${escapeHtml(q.opciones[q.correcta])}".${expl}`
     );
@@ -284,8 +290,12 @@ function showResults(isTimeout = false) {
     $('result-subtitle').textContent = subtitle;
   }
 
-  $('score-num').textContent       = STATE.score;
-  $('score-denom').textContent     = `/${STATE.total}`;
+  const totalPoints = 20;
+  const points = (STATE.score / STATE.total) * totalPoints;
+  const displayPoints = Number.isInteger(points) ? points : points.toFixed(1);
+
+  $('score-num').textContent       = displayPoints;
+  $('score-denom').textContent     = `/20`;
   $('r-correct').textContent       = STATE.score;
   $('r-wrong').textContent         = STATE.total - STATE.score;
   $('r-pct').textContent           = `${pct}%`;
